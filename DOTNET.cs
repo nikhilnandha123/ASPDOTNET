@@ -1,3 +1,65 @@
+// theme mate na step 
+
+--> pela project upar rigth click karvanu 
+--> pachhi tema thi add upar click karvanu
+--> tena pachhi tema asp.net name nu folder add karvnu 
+--> tema theme name nu folder j hase aetle tene click karo aetle bani jase
+--> tema add karvnu css 
+--> pachhi j code lakhvo hoy te je apply karvu hoy te text chhe font chhe color etc
+--> e thai jay pachhi  tamare je page ma rakhvi hoy te page ma javanu tema peli liti ni andar lakvanu 
+    theme="theme";avi rite suggesion aavi jase
+--> done
+
+
+//login mate no code
+SqlConnection cn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|HRM.mdf;Integrated Security=True");
+        SqlCommand cmd = new SqlCommand("select username,password from login where username='"+txtemail.Text+"' and password='"+txtpwd.Text+"'",cn);
+        cn.Open();
+        SqlDataReader dr = cmd.ExecuteReader();
+        if (dr.Read())
+        {
+            Session["id"] = txtemail.Text;
+            Response.Redirect("NewEmployee.aspx");
+        }
+        else
+        {
+            Response.Write("<script>alert('Do Not Match')</script>");
+        }
+
+//logout mate no code
+protected void Page_Load(object sender, EventArgs e)
+    {
+        if(Session["username"]!=null)
+        {
+            Session["username"].ToString();
+        }
+        else
+        {
+            Response.Redirect("Login.aspx");
+        }
+    }
+
+//crude operation no code chhe aa
+
+        string conn = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|HRM.mdf;Integrated Security=True";
+        SqlConnection con = new SqlConnection(conn);
+
+        con.Open();
+        string query = "insert into Employee(Name,Email,ContactNo,OfferedSalary)Values(@Name,@Email,@ContactNo,@OfferedSalary)";
+        SqlCommand cmd = new SqlCommand(query,con);
+
+        cmd.Parameters.AddWithValue("@Name", txtnm.Text);
+        cmd.Parameters.AddWithValue("@Email", txtmail.Text);
+        cmd.Parameters.AddWithValue("@ContactNo", txtno.Text);
+        cmd.Parameters.AddWithValue("@OfferedSalary", txtsal.Text);
+        cmd.ExecuteNonQuery();
+        con.Close();
+        Response.Write("<script> alert('Record Inserted Successed')</script>");
+//    }
+
+
+
+
 // session mate no code chhe aa
 // aaa peli file no code chhe
 Session["name"] = txtname.Text;
