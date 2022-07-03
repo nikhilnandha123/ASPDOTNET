@@ -57,6 +57,30 @@ protected void Page_Load(object sender, EventArgs e)
         Response.Write("<script> alert('Record Inserted Successed')</script>");
 //    }
 
+//cookie mate no code
+
+ protected void btnretrive_Click(object sender, EventArgs e)
+        {
+            if (Response.Cookies["sname"] == null)
+            {
+                txtretrive.Text = "Cookies not found";
+            }
+            else
+            {
+                txtretrive.Text = Request.Cookies["sname"].Value;
+                //Request.Cookies["uname"].Value = txtretrive.Text.ToString(); 
+            }
+           
+        }
+
+        protected void btnadd_Click(object sender, EventArgs e)
+        {
+            Response.Cookies["sname"].Value = txtadd.Text.ToString();
+            Response.Cookies["sname"].Expires = DateTime.Now.AddSeconds(10);
+            txtadd.Text = "";
+
+        }
+
 
 
 
